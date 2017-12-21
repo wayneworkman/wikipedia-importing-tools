@@ -4,6 +4,8 @@ Hard disk space: You really need about 250GB of free (and really super fast) dis
 
 The instructions are sometimes loose in spots, generically saying "edit this file". Deal with it.
 
+All the scripts have variables at the top of them. You'll probably need to modify these depending on where you put things.
+
 This isn't a linux tutorial, it's a guide for those familiar with Linux who want to stand up a copy of Wikipedia, and is tailored as such to that audience.
 
 
@@ -203,17 +205,16 @@ https://github.com/wayneworkman/mediawiki-tools-mwdumper
 I've included a binary of the compiled tool for convienence, but you may need to compile to fix further problems with future changes. Please if you fix anything in my fork, submit the pull request to me because WikiMedia foundation has abandoned their github codebase.
 
 
-Convert that massive xml file to SQL (Need to do it this way for tools below to work):
+Convert that massive xml file to SQL (Not recommended):
 ```
 nohup java -server -jar mwdumper-1.26.jar --format=sql:1.5 /root/enwiki-20170601-pages-articles-multistream.xml | zstd -zc > /root/enwiki-20170601-pages-articles-multistream.sql.zst &
 ```
 
 
-How to do it without compressing the output (not recommended):
+How to do it without compressing the output (recommended):
 ```
 nohup java -server -jar mwdumper-1.26.jar --format=sql:1.5 /root/enwiki-20171201-pages-articles-multistream.xml > /root/enwiki-20171201-pages-articles-multistream.sql &
 ```
-If you did it without compressing the output, you will need to compress the output next with the `compressSplits.sh` script.
 
 ====================== Split the SQL file into smaller files ============================
 
@@ -221,6 +222,15 @@ If you did it without compressing the output, you will need to compress the outp
 Split that huge file into 200-500MB chunks:
 nohup split --additional-suffix=".sql" --lines=1000 enwiki-20170601-pages-articles-multistream.sql &
 ```
+
+======================= Compress your splits =======================================
+
+After having split the file up into several smaller files, you need to compress these files. This is really important, because disk IOPS is the bottleneck here and extreme performance benefits are realized on even the fastest disks. 
+
+```
+./compressSplits.sh
+```
+
 
 ============================ Fix database problem ==========================
 
