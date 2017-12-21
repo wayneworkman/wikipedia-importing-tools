@@ -183,9 +183,11 @@ pbzip2 -v -d -k -m2000 enwiki-20170601-pages-articles-multistream.xml.bz2
 
 ===================== do not use importDump.php - terrible idea =====================
 
-#Import wikipedia dump:
+Do not do this, horrible idea. it will NEVER get done!
+Import wikipedia dump:
+```
 nohup php /var/www/html/maintenance/importDump.php /var/enwiki-20170320-pages-articles-multistream.xml &
-
+```
 
 
 ============================== Convert XML to SQL =============================
