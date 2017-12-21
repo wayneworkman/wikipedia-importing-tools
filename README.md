@@ -14,6 +14,7 @@ INSTRUCTIONS:
 
 
 ========================== Needed Packages ==========================
+
 Debian 8:
 ```
 apt-get install -y pbzip2 curl mysql-client mysql-common mysql-server apache2 libapache2-mod-php5 php5 php5-common php5-cli php5-mysql php5-mcrypt php5-curl php5-gd php5-intl php-pear apt-get default-jre
@@ -25,12 +26,14 @@ apt-get install -y pbzip2 curl mariadb-client mariadb-common mariadb-server apac
 ```
 
 ========================== Fix Vim Mouse ============================
+
 For Debian 9, un-do Vim's default mouse config:
 ```
 sed -i.bak 's/set mouse=a/\"set mouse=a/' /usr/share/vim/vim80/defaults.vim
 ```
 
 ==================== Get latest copy of mediawiki ===================
+
 mediawiki 1.28:
 ```
 curl -O https://releases.wikimedia.org/mediawiki/1.28/mediawiki-1.28.0.tar.gz
@@ -56,6 +59,7 @@ chown -R www-data:www-data /var/www/html/*
 ```
 
 ============= Location of php.ini if You want to mess with it ========
+
 Debina 8:
 ```
 vim /etc/php5/apache2/php.ini
@@ -68,6 +72,7 @@ vim /etc/php/7.0/apache2/php.ini
 
 
 ================ Secure wikimedai some ==================
+
 Set apache to securely handle the images dir. Edit this file:
 ```
 vim /etc/apache2/apache2.conf
@@ -91,6 +96,7 @@ Put this in there at the bottom:
 
 
 ===================== Setup Services =========================
+
 Enable the needed services on boot:
 ```
 systemctl enable apache2
@@ -101,6 +107,7 @@ systemctl restart mysql
 
 
 ======================= Setup database =======================
+
 Create a necessary database for wikipedia and a user with permission to use it. Execute these one by one, do not copy/paste:
 ```
 mysql
@@ -113,12 +120,13 @@ quit
 
 
 ========================== Setup wikimedia =====================
+
 Visit the home page. Go through the installer.
 
 Default user: Admin
 Default pass: Password1
 
-Enable every single EXTENSION available - this makes all of wikipedia's formating look like information instead of jibberish.
+Enable every single EXTENSION available - this makes all of wikipedia's formating look like information instead of jibberish. IF YOU SKIP THIS, you basically have to start over if you want to enable these later because I've not figured out how to enable them after the fact yet. Learn from my mistakes, enable every extension right here!
 
 When asked, download LocalSettings.php from web-interface, then move it to the server at /var/www/html
 Reset permissions again to www-data:www-data
@@ -128,6 +136,7 @@ chown -R www-data:www-data /var/www/html/*
 
 
 ============================ Downloading a wikipedia dump ============
+
 #Download the latest file:
 https://dumps.wikimedia.org/enwiki/
 
@@ -139,6 +148,7 @@ nohup wget https://dumps.wikimedia.org/enwiki/20170601/enwiki-20170601-pages-art
 
 
 ============================ Debian 8 special package needs ==========================
+
 Install java Debian 8:
 Add to /etc/apt/sources.list
 ```
@@ -155,12 +165,14 @@ apt-get -y install zstd
 
 
 ===================== do not use importDump.php - terrible idea =====================
+
 #Import wikipedia dump:
 nohup php /var/www/html/maintenance/importDump.php /var/enwiki-20170320-pages-articles-multistream.xml &
 
 
 
 ============================= Use pbzip to decompress ============================ 
+
 pbzip2  - is an awesome and parallel implimentation of bzip2. I really think pbzip2 should just replace bzip2.
 
 example:
@@ -212,6 +224,7 @@ ALTER TABLE page ADD page_counter bigint unsigned NOT NULL default 0;
 quit
 ```
 =========================== Configure MariaDB/MySQL for big inserts ==============
+
 Edit:   /etc/mysql/my.cnf
 max_allowed_packet = 256M
 
@@ -226,6 +239,7 @@ systemctl restart mysqld
 
 
 ================================== Import the data =============================
+
 To import the data, use the utility script called importSplits.sh This script will access your splits directory and start importing. You can create a stop file (as defined in the script) if for some reason you wanted to stop at a safe spot to reboot or whatever.
 
 Run the script like this:
