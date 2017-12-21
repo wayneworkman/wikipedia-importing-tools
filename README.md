@@ -170,7 +170,11 @@ example:
 ```
 pbzip2 -v -d -k -m10000 file.bz2
 ```
-Options:  -v verbose -d decompress -k keep the original file -m10000 use 10Gb of RAM
+Options:
+          -v      verbose
+          -d      decompress
+          -k      keep the original file 
+          -m10000 use 10Gb of RAM
 
 What I used:
 ```
