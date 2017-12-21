@@ -270,7 +270,4 @@ Run the script like this:
 ```
 ./importSplits.sh
 ```
-
-
-
-
+As it runs, it'll move files from your splits directory to a new directory called 'completed'. This way, you can use the stop file to stop the process safely, reboot, then restart the script to pickup where you left off.
