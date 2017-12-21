@@ -161,12 +161,6 @@ apt-get -y install zstd
 #Then disable the sid repository.
 
 
-===================== do not use importDump.php - terrible idea =====================
-
-#Import wikipedia dump:
-nohup php /var/www/html/maintenance/importDump.php /var/enwiki-20170320-pages-articles-multistream.xml &
-
-
 
 ============================= Use pbzip to decompress ============================ 
 
@@ -183,12 +177,23 @@ What I used:
 pbzip2 -v -d -k -m2000 enwiki-20170601-pages-articles-multistream.xml.bz2
 ```
 
+===================== do not use importDump.php - terrible idea =====================
+
+#Import wikipedia dump:
+nohup php /var/www/html/maintenance/importDump.php /var/enwiki-20170320-pages-articles-multistream.xml &
+
+
+
 ============================== Convert XML to SQL =============================
 
-This step was by far the most difficult. I tried using the terrible and slow importDump.php and let this run for WEEKS, without even a dent in the workload. Wikimedia has a tool called mwdumper that they do not appear to maintain anymore. The repository on githup is:
+This step was by far the most difficult. I tried using the terrible and slow importDump.php and let this run for WEEKS, without even a dent in the workload. Wikimedia has a tool called mwdumper that they do not appear to maintain anymore. However, mwdumper is BYFAR the best tool to convert this XML file into SQL because it does the job blazingly fast. The official repository (that you shouldn't use) on githup is:
+
 https://github.com/wikimedia/mediawiki-tools-mwdumper
+
 That's the broken copy. I found all community contributed patches for this tool in web posts, forked the project, and applied the patches. I've The patched sourcecode is available from here:
+
 https://github.com/wayneworkman/mediawiki-tools-mwdumper
+
 I've included a binary of the compiled tool for convienence, but you may need to compile to fix further problems with future changes. Please if you fix anything in my fork, submit the pull request to me because WikiMedia foundation has abandoned their github codebase.
 
 
