@@ -121,10 +121,7 @@ quit
 
 ========================== Setup wikimedia =====================
 
-Visit the home page. Go through the installer.
-
-Default user: Admin
-Default pass: Password1
+Visit the home page via your server IP address in a web browser. Go through the installer.
 
 Enable every single EXTENSION available - this makes all of wikipedia's formating look like information instead of jibberish. IF YOU SKIP THIS, you basically have to start over if you want to enable these later because I've not figured out how to enable them after the fact yet. Learn from my mistakes, enable every extension right here!
 
