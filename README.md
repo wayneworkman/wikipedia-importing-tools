@@ -203,13 +203,13 @@ https://github.com/wayneworkman/mediawiki-tools-mwdumper
 I've included a binary of the compiled tool for convienence, but you may need to compile to fix further problems with future changes. Please if you fix anything in my fork, submit the pull request to me because WikiMedia foundation has abandoned their github codebase.
 
 
-Convert that massive xml file to SQL (recommended):
+Convert that massive xml file to SQL (Don't have split code in next section to use this output yet):
 ```
 nohup java -server -jar mwdumper-1.26.jar --format=sql:1.5 /root/enwiki-20170601-pages-articles-multistream.xml | zstd -zc > /root/enwiki-20170601-pages-articles-multistream.sql.zst &
 ```
 
 
-How to do it without compressing the output (extremely not recommended):
+How to do it without compressing the output (recommended):
 ```
 nohup java -server -jar mwdumper-1.26.jar --format=sql:1.5 /root/enwiki-20171201-pages-articles-multistream.xml > /root/enwiki-20171201-pages-articles-multistream.sql &
 ```
