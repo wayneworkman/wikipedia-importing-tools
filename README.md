@@ -244,8 +244,12 @@ quit
 ```
 =========================== Configure MariaDB/MySQL for big inserts ==============
 
-Edit:   /etc/mysql/my.cnf
+Edit this file: `/etc/mysql/my.cnf`
+
+Add this line:
+```
 max_allowed_packet = 256M
+```
 
 Reload mysql/mariadb:
 ```
