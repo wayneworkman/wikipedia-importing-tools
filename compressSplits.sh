@@ -1,6 +1,6 @@
 #!/bin/bash
 splitDir="/root/splits"
-log="/root/importSplitLog.log"
+log="/root/compressSplitLog.log"
 cd $splitDir
 for i in $(ls /root/splits/*); do
     echo "Processing $i" >> $log
