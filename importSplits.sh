@@ -9,7 +9,7 @@ stopFile="/root/stop"  #If the stop file exists, exit. This allows you to do tou
 cd $splitDir
 
 
-source $preImportScript
+#source $preImportScript
 
 for i in $(ls /root/splits/x*.sql.zst); do
     echo "Processing $i" >> $log
@@ -22,5 +22,5 @@ for i in $(ls /root/splits/x*.sql.zst); do
     fi
 done
 
-source $postImportScript
+#source $postImportScript
 
